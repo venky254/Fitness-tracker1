@@ -46,4 +46,3 @@ steps:
     run: |
       kubectl set image deployment/fitness-deployment fitness-container=$DOCKER_IMAGE:${{ github.sha }}
       kubectl rollout status deployment/fitness-deployment
-```
