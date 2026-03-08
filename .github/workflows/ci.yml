@@ -13,7 +13,7 @@ jobs:
 build-and-deploy:
 runs-on: ubuntu-latest
 
-
+```
 steps:
   - name: Checkout Code
     uses: actions/checkout@v3
@@ -46,3 +46,4 @@ steps:
     run: |
       kubectl set image deployment/fitness-deployment fitness-container=$DOCKER_IMAGE:${{ github.sha }}
       kubectl rollout status deployment/fitness-deployment
+
