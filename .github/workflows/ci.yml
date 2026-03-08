@@ -1,44 +1,44 @@
 name: CI-CD-Pipeline
 
 on:
-push:
-branches:
-- main
-- master
+ push:
+    branches:  [main,master]
+
+
 
 jobs:
-build-and-push:
-runs-on: ubuntu-latest
+    build-and-push:
+    runs-on: ubuntu-latest
 
 
-steps:
-  - name: Checkout-Code
-    uses: actions/checkout@v3
+    steps:
+    - name: Checkout-Code
+      uses: actions/checkout@v3
 
-  - name: Setup-Node
-    uses: actions/setup-node@v3
-    with:
-      node-version: "18"
+    - name: Setup-Node
+      uses: actions/setup-node@v3
+      with:
+       node-version: "18"
 
-  - name: Install-Dependencies
-    run: |
-      npm install || echo "No dependencies"
+    - name: Install-Dependencies
+      run: 
+        npm install || echo "No dependencies"
 
-  - name: Run-Tests
-    run: |
+    - name: Run-Tests
+     run: |
       npm test || echo "Tests skipped"
 
-  - name: Docker-Build
-    run: |
-      docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/photostudio-app:latest .
+     - name: Docker-Build
+       run: |
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/photostudio-app:latest .
 
-  - name: Docker-Login
-    uses: docker/login-action@v2
-    with:
+    - name: Docker-Login
+     uses: docker/login-action@v2
+     with:
       username: ${{ secrets.DOCKERHUB_USERNAME }}
       password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-  - name: Docker-Push
-    run: |
-      docker push ${{ secrets.DOCKERHUB_USERNAME }}/photostudio-app:latest
+    - name: Docker-Push
+      run: |
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/photostudio-app:latest
 
