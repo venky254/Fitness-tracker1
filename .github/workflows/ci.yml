@@ -57,5 +57,5 @@ jobs:
       
     - name: Deploy to EKS
       run: |
-        kubectl apply -f deployment.yaml
-        kubectl apply -f service.yaml
+        kubectl apply -f k8s/app-deployment.yaml
+        kubectl apply -f k8s/mongodb-deployment.yaml
