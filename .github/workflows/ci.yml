@@ -59,3 +59,5 @@ jobs:
       run: |
         kubectl apply -f k8s/app-deployment.yaml
         kubectl apply -f k8s/mongodb-deployment.yaml
+        kubectl apply -f k8s/sonar-deployment.yaml
+
